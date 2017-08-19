@@ -14,7 +14,6 @@ iBlog的Vue.js版本
 3. 规划组件结构
 
 ```
-
 │ 
 ├─ main.js  入口文件
 │  
@@ -30,13 +29,13 @@ iBlog的Vue.js版本
 │     ├─ Main.vue # 文章列表
 │      
 └─router
-        index.js # 路由配置
+      ├─ index.js # 路由配置
         
-
-
 ```
-
 4. 编写对应路由
 5. 完成静态页面呈现假数据开发任务
+<img src="http://ou1frpks8.bkt.clouddn.com/002.png" width=200 /> 
+<img src="http://ou1frpks8.bkt.clouddn.com/001.png" width=200 />
+
 
 
