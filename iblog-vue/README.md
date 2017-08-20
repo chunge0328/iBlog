@@ -40,4 +40,4 @@ iBlog的Vue.js版本
 3. 使用的是我的腾讯云主机上的MySql数据库，使用Navcat客户端本地查看
 3. 写完了获得博客列表的接口
 4. 写完了博客详情的接口
-5. 关于TomDog,移步于[这里](../../iblog-server) 
+5. 关于TomDog,移步于[这里](https://github.com/coderLius/iBlog/tree/master/iblog-server) 
