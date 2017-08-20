@@ -2,10 +2,7 @@
   <div v-html="tmp" class="mdcontent markdown-body"></div>
 </template>
 
-
 <script>
-
-
 export default {
     data() {
         return {

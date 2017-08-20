@@ -1,0 +1,20 @@
+{
+  "name": "iblog-server",
+  "version": "1.0.0",
+  "description": "The iBlog server that used Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node run index.js"
+  },
+  "keywords": [
+    "Node.js",
+    "iBlog",
+    "FE"
+  ],
+  "author": "coderLius",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.14.1",
+    "watch": "^1.0.2"
+  }
+}

@@ -1,10 +1,6 @@
 <template lang="html">
     <div class="art-list">
       <article-item></article-item>
-      <article-item></article-item>
-      <article-item></article-item>
-      <article-item></article-item>
-      <article-item></article-item>
       {{aa}}
     </div>
 </template>

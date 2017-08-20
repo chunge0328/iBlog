@@ -1,19 +1,20 @@
 <template lang="html">
       <div class="art-item">
-          <router-link to="">
-                <h2 class="art-title">这是今日最劲爆头条</h2>
+          <router-link to="'/home/articlemain/'+aid">
+                <h2 class="art-title">{{name}}</h2>
                 <div class="tag-box">
-                <span>算法</span>
-                <span>JS</span>
-                <span>HTML</span>
+                <span>占位</span>
+                <span>占位</span>
+                <span>占位</span>
                 </div> 
-                <p class="sm">这是摘要</p>
+                <p class="sm">占位  这是摘要</p>
           </router-link>
       </div>
 </template>
 
 <script>
 export default {
+    // props:[aid,name]
 }
 </script>
 

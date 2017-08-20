@@ -6,10 +6,6 @@ iBlog的Vue.js版本
 
 ### 2017/08/19 
 1. 界面风格确定 -- 类似Hexo中的Next主题风格，清新而带感
-2. 搭建`Vue.js`环境,相关技术栈如下：
-	- vue-cli  -- 初始化项目的脚手架 
-	- vue-router -- 管理路由
-	- aiox  -- Ajax通信
 2. 搭建开发环境，使用`vue-cli`脚手架初始化项目
 3. 规划组件结构
 
@@ -38,4 +34,10 @@ iBlog的Vue.js版本
 <img src="http://ou1frpks8.bkt.clouddn.com/001.png" width=200 />
 
 
-
+### 2017/08/20
+1. 自己动手造了一个轮子 -- 我叫它TomDog，是一个路由管理的迷你框架
+2. 用Node.js中fs模块的watch实现了md文件自动添加到文件夹时，信息自动录入数据库功能
+3. 使用的是我的腾讯云主机上的MySql数据库，使用Navcat客户端本地查看
+3. 写完了获得博客列表的接口
+4. 写完了博客详情的接口
+5. 关于TomDog,移步于[这里](../../iblog-server) 

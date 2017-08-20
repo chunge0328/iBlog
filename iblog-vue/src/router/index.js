@@ -24,7 +24,7 @@ const routes = [
         component: Categories
       },
       {
-         path: '/home/articlemain',
+         path: '/home/articlemain/:id',
         component: ArticleMain
       },
       {
