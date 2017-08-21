@@ -24,7 +24,7 @@ td.useRouter({
 td.run(9090)
 
 function home(req,res){
-    staticRouter(req,res,'static/index.html')
+    staticRouter(req,res,'static/index2.html')
 }
 
 function list(req,res){
