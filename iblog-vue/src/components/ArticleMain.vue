@@ -12,7 +12,7 @@ export default {
   mounted() {
     console.log(this.$route.params)
     let id = this.$route.params.id
-    this.fetchData(`http://localhost:9090/api/article/detail?id=${id}`)
+    this.fetchData(`http://182.254.211.214:9090/api/article/detail?id=${id}`)
   },
   methods: {
     fetchData(url) {
