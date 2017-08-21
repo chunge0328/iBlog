@@ -64,5 +64,7 @@ iBlog的Vue.js版本
 <keep-alive><router-view></router-view></keep-alive>
 ```
 3. 在用Node.js断开与MySQL的连接时，出现了问题
-> 若使用`conn = null`制空的方法，这种方法看似有效，但是在多次数据库操作后，会报错，错误原因显示`too many connections ...`，应该就是说，`conn = null`并没有让连接真的断开
+```
+若使用`conn = null`制空的方法，这种方法看似有效，但是在多次数据库操作后，会报错，错误原因显示`too many connections ...`，应该就是说，`conn = null`并没有让连接真的断开
+```
 4. 展示功能大致完成
