@@ -1,6 +1,6 @@
 
 const fs = require('fs')
-const articleDao = require('../db_mysql_util/article_dao')
+const articleDao = require('../db_mysql_util/dao/article_dao')
 
 const path = '../../static/mds'
 fs.watch(path, function (event, filename) {

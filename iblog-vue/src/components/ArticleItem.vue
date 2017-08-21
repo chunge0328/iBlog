@@ -1,7 +1,7 @@
 <template lang="html">
       <div class="art-item">
-          <router-link to="'/home/articlemain/'+aid">
-                <h2 class="art-title">{{name}}</h2>
+          <router-link :to="'/home/articlemain/'+aid">
+                <span class="art-title">{{name}}</span>
                 <div class="tag-box">
                 <span>占位</span>
                 <span>占位</span>
@@ -14,14 +14,18 @@
 
 <script>
 export default {
-    // props:[aid,name]
+    props:{
+        aid: String,
+        name: String
+    }
 }
 </script>
 
 <style scoped lang="css">
 .art-item {
     border-bottom: 2px dotted #ccc;
-    padding: 12px;
+    padding: 20px 12px;
+
 }
 .art-item:hover {
     cursor: pointer;
@@ -40,6 +44,10 @@ export default {
 
 .art-title {
     float: left;
+    font-size: 20px;
+    /* text-align: center; */
+    word-break: break-word;
+    font-weight: 400;
 }
 
 .tag-box span {
@@ -54,7 +62,8 @@ export default {
 
 .sm {
     clear: both;
-    padding-top: 10px;
-    font-size: 14px;
+    color: #999;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 12px;
 }
 </style>

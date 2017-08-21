@@ -29,12 +29,13 @@ function update() {
 
 }
 
-function select(callback) {
+function select(page,size,callback) {
     DB.MysqlOpen()
-    var userAddSql = 'SELECT * FROM article';
-    conn().query(userAddSql, function (err, rows, fields) {
+    var userAddSql = 'SELECT * FROM article LIMIT ?,?;'
+     var userAddSql_Params = [Number(page)*Number(size), Number(size)]
+    conn().query(userAddSql, userAddSql_Params, function (err, rows, fields) {
         if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
+            console.log('[SELECT ERROR] - ', err.message)
             return;
         }
         callback({

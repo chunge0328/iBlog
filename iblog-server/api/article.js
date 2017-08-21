@@ -3,7 +3,10 @@ const url = require('url')
 const readMD = require('../utils/fs_util/read_md')
 
 function list(req, res) {
-    articleDao.select(function (list) {
+    let query = url.parse(req.url,true).query
+    let page = query.page
+    let size = query.size
+    articleDao.select(page,size,function (list) {
         console.log(list)
         res.writeHead(200, {
             'Content-Type': 'application/json;charset=UTF-8'
@@ -13,9 +16,10 @@ function list(req, res) {
 }
 
 function detail(req, res) {
-    let pathname = url.parse(req.url).pathname
-    let id = pathname.match(/\d+$/)
-    console.log('id is : ', id)
+    // let pathname = url.parse(req.url).pathname
+    // let id = pathname.match(/\d+$/)
+    let query = url.parse(req.url,true).query
+    let id = query.id
     articleDao.getArticleById(id, function (data) {
         let article = data.article
         readMD(article.name, function (data) {

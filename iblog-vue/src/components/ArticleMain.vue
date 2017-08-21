@@ -4,29 +4,39 @@
 
 <script>
 export default {
-    data() {
-        return {
-            tmp: this.tmp
-        }
-    },
-    mounted() {
-        // http://localhost:8080/api/file
-        this.$http.get('/api/file').then((data) => {   /* 调用vue的ajax来请求数据，promise语法，并用es6的箭头函数 */
-            var text = data.body
-             var converter = new showdown.Converter()
-        this.tmp = converter.makeHtml(text)
-        console.log(text)
-        })
-       
+  data() {
+    return {
+      tmp: this.tmp
     }
+  },
+  mounted() {
+    console.log(this.$route.params)
+    let id = this.$route.params.id
+    this.fetchData(`http://localhost:9090/api/article/detail?id=${id}`)
+  },
+  methods: {
+    fetchData(url) {
+      this.$http.get(url).then((res) => {
+        var text = res.body.content
+        var converter = new showdown.Converter()
+        this.tmp = converter.makeHtml(text)
+      }).catch(function (err) {
+        console.log(err)
+      })
+    }
+  }
 }   
 </script>
 
 <style lang="css">
 .mdcontent {
-    padding: 20px;
-    font-size: 14px;
+  padding: 20px;
+  font-size: 14px;
 }
+
+
+
+
 /* .mdcontent pre{
      padding-right: 1em;
     padding-left: 1em;
@@ -638,7 +648,7 @@ export default {
   padding-bottom: 0.2em;
   margin: 0;
   font-size: 85%;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
 }
 

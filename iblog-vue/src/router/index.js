@@ -24,16 +24,17 @@ const routes = [
         component: Categories
       },
       {
-         path: '/home/articlemain/:id',
+        path: '/home/articlemain/:id',
         component: ArticleMain
       },
       {
         path: '/home/call',
         component: Call
-      }
+      },
+      { path: '*', redirect: '/home/main' }
     ]
-  }
-
+  },
+  { path: '*', redirect: '/' }
 ]
 export default new VueRouter({
   routes

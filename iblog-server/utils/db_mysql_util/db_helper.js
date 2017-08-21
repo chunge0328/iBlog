@@ -15,7 +15,7 @@ function MysqlOpen() {
 }
 
 function MysqlClose() {
-    conn = null
+    // conn.end()
 }
 
 function getConn() {

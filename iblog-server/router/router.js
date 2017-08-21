@@ -12,7 +12,7 @@ function Router(req,res) {
     }else{
         dynamicRouter.call(this,req,res,pathname)
     }
-    console.log('obj ', url.parse(req.url))
+    console.log('obj ', url.parse(req.url,true))
     
 }
 

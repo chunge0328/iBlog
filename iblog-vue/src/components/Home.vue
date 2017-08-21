@@ -8,20 +8,20 @@
             </div>
            
             <ul class="m-list">
-                <li>
+                <li @click="choose(0)" :class="{ active: isActive[0] }">
                     <router-link to='/home/main'>主页</router-link>
                 </li>
-                <li>
+                <li @click="choose(1)" :class="{ active: isActive[1] }">
                     <router-link to='/home/categories'>分类</router-link>
                 </li>
-                <li>
+                <li @click="choose(2)" :class="{ active: isActive[2] }">
                     <router-link to='/home/call'>私信</router-link>
                 </li>
             </ul>
         </div>
 
         <div class="main">
-            <router-view></router-view>
+            <keep-alive><router-view></router-view></keep-alive>
         </div>
 
     </div>
@@ -30,18 +30,46 @@
 <script>
 
 export default {
-
+    data(){
+       return {
+            isActive: [true,false,false]
+       }
+    },
+    methods:{
+        choose(index){
+            this.isActive = [false,false,false]
+            this.isActive[index] = true
+            console.log(index)
+        }
+    }
 }
 
 </script>
 
 <style lang="css" scoped>
 .container {
-
     overflow: auto;
     width: 960px;
     margin: 20px auto;
     font-size: 22px;
+}
+
+.active{
+    position: relative;
+    background: #f9f9f9;
+}
+.active::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -4px;
+    margin-right: 20px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #bbb;
+
 }
 
 .left-menu {
