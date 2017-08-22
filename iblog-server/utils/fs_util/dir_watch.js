@@ -1,32 +1,46 @@
 
 const fs = require('fs')
 const articleDao = require('../db_mysql_util/dao/article_dao')
+const readMD = require('./read_md')
 
-const path = '../../static/mds'
-fs.watch(path, function (event, filename) {
-  // console.log('event is: ' + event);
-  if(event == 'rename'){ // 有文件变化
-    fs.stat(path+'/'+filename,function(err,state){
-      if(err){
-        // 删除
-      }else{
-        // 增加
-        var d = new Date().getTime()
-        var r = 1000*Math.random()+1000;
-        articleDao.add({
-          id: state.ino,
-          summary: '',
-          name: filename
-        })
-         console.log('err - ',err)
-       console.log('state - ', state.ino)
-      }
-     
-    })
-  }
-  // if (filename) {
-  //   console.log('filename provided: ' + filename + '\n\n ');
-  // } else {
-  //   console.log('filename not provided');
-  // }
-});
+function watchMDFiles() {
+  const path = './static/mds'
+  fs.watch(path, function (event, filename) {
+    console.log('event is: ' + event);
+    if (event == 'rename') { // 有文件变化
+      fs.stat(path + '/' + filename, function (err, state) {
+
+        if (err) {
+          // 删除
+        } else {
+          // 重命名
+          let newName = state.ino + '.md'
+          fs.renameSync(path + '/' + filename, path + '/' + newName)
+          readMD(newName, function (data) {
+
+            let content = data.toString()
+            let index = content.search(/====/)
+            let configStr = content.substring(0, index)
+            // content = content.slice(index + 4)
+            // 容错性处理暂时没做
+            let configObj = JSON.parse(configStr)
+            let summary = configObj.summary
+            let title = configObj.title
+            let list = configObj.list.join(',')
+            // 增加
+            articleDao.add({
+              id: state.ino,
+              summary: '',
+              title: title,
+              list: list
+            })
+          })
+
+        }
+
+      })
+    }
+  });
+}
+
+module.exports = watchMDFiles

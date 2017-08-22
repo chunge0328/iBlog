@@ -1,7 +1,7 @@
 <template lang="html">
       <div class="art-item">
           <router-link :to="'/home/articlemain/'+aid">
-                <span class="art-title">{{name}}</span>
+                <span class="art-title">{{title}}</span>
                 <div class="tag-box">
                 <span>占位</span>
                 <span>占位</span>
@@ -16,7 +16,7 @@
 export default {
     props:{
         aid: String,
-        name: String
+        title: String
     }
 }
 </script>

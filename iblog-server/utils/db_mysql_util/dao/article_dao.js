@@ -3,8 +3,8 @@ const conn = DB.conn
 
 function add(obj) {
     DB.MysqlOpen()
-    var userAddSql = 'INSERT INTO article(id,summary,name) VALUES(?,?,?)';
-    var userAddSql_Params = [obj.id, obj.summary, obj.name];
+    var userAddSql = 'INSERT INTO article(id,summary,title,list) VALUES(?,?,?,?)';
+    var userAddSql_Params = [obj.id, obj.summary, obj.title, obj.list];
     //增
     conn().query(userAddSql, userAddSql_Params, function (err, result) {
         if (err) {
@@ -29,10 +29,10 @@ function update() {
 
 }
 
-function select(page,size,callback) {
+function select(page, size, type, callback) {
     DB.MysqlOpen()
-    var userAddSql = 'SELECT * FROM article LIMIT ?,?;'
-     var userAddSql_Params = [Number(page)*Number(size), Number(size)]
+    var userAddSql = "SELECT * FROM article WHERE list LIKE '%?%' LIMIT ?,?;"
+    var userAddSql_Params = [type, Number(page) * Number(size), Number(size)]
     conn().query(userAddSql, userAddSql_Params, function (err, rows, fields) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message)
@@ -45,12 +45,12 @@ function select(page,size,callback) {
     });
 }
 
-function getArticleById(id,callback) {
+function getArticleById(id, callback) {
     DB.MysqlOpen()
     var userAddSql = 'SELECT * FROM article where id = ?'
-     var userAddSql_Params = [id]
+    var userAddSql_Params = [id]
     //增
-    conn().query(userAddSql,userAddSql_Params, function (err, row, fields) {
+    conn().query(userAddSql, userAddSql_Params, function (err, row, fields) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
             return;

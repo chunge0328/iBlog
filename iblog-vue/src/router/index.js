@@ -17,7 +17,8 @@ const routes = [
     children: [
       {
         path: '/home/main',
-        component: Main
+        component: Main,
+        meta: { keepAlive: true } 
       },
       {
         path: '/home/categories',

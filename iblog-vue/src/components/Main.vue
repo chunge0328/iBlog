@@ -1,20 +1,24 @@
 <template lang="html">
+
+
     <div class="art-list">
       <article-item
        v-for="item in list"
-       :aid="item.id" :name="item.name" 
+       :aid="item.id" :title="item.title" 
        ></article-item>
 
        <button class="see-more" @click="getMore()" v-if="!infoshow">查看更多</button>
        <button class="info-show" v-if="infoshow">到底啦</button>
+
+
     </div>
 
-    
 </template>
 
 <script>
 import ArticleItem from './ArticleItem'
 export default {
+  name: 'main',
   components: {
     ArticleItem
   },
@@ -31,7 +35,7 @@ export default {
   },
   methods: {
     fetchData(page,size) {
-      this.$http.get(`http://182.254.211.214:9090/api/article/list?size=${size}&page=${page}`).then((res) => {
+      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}`).then((res) => {
         console.log(res.body.list)
         if(res.body.list.length > 0){
           this.list = this.list.concat(res.body.list)

@@ -7,21 +7,22 @@
                <p class="info-desc">设计师美感，工匠师精细，数学家严谨，程序员生活。。。</p>
             </div>
            
-            <ul class="m-list">
-                <li @click="choose(0)" :class="{ active: isActive[0] }">
+            <ul class="m-list"  @click="choose">
+                <li in="main" :class="{ active: isActive[0] }">
                     <router-link to='/home/main'>主页</router-link>
                 </li>
-                <li @click="choose(1)" :class="{ active: isActive[1] }">
+                <li id="categories" :class="{ active: isActive[1] }">
                     <router-link to='/home/categories'>分类</router-link>
                 </li>
-                <li @click="choose(2)" :class="{ active: isActive[2] }">
+                <li id="call" :class="{ active: isActive[2] }">
                     <router-link to='/home/call'>私信</router-link>
                 </li>
             </ul>
         </div>
 
         <div class="main">
-            <keep-alive><router-view></router-view></keep-alive>
+             <keep-alive><router-view v-if="$route.meta.keepAlive"></router-view></keep-alive>
+             <router-view v-if="!$route.meta.keepAlive"></router-view> 
         </div>
 
     </div>
@@ -30,16 +31,34 @@
 <script>
 
 export default {
-    data(){
-       return {
-            isActive: [true,false,false]
-       }
+    data() {
+        return {
+            isActive: [true, false, false]
+        }
     },
-    methods:{
-        choose(index){
-            this.isActive = [false,false,false]
+    methods: {
+        choose(e) {
+            let target = e.target
+            let index = 0
+            while (target.nodeName !== 'UL') {
+                if (target.nodeName === 'LI') {
+                    switch (target.id) {
+                        case 'home':
+                            index = 0
+                            break;
+                        case 'categories':
+                            index = 1
+                            break;
+                        case 'call':
+                            index = 2
+                            break;
+                    }
+                    break;
+                }
+                target = target.parentNode
+            }
+            this.isActive = [false, false, false]
             this.isActive[index] = true
-            console.log(index)
         }
     }
 }
@@ -54,11 +73,12 @@ export default {
     font-size: 22px;
 }
 
-.active{
+.active {
     position: relative;
     background: #f9f9f9;
 }
-.active::after{
+
+.active::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -69,7 +89,6 @@ export default {
     height: 8px;
     border-radius: 50%;
     background-color: #bbb;
-
 }
 
 .left-menu {
@@ -102,16 +121,19 @@ export default {
 .m-list>li {
     text-align: center;
 }
-.m-list>li a{
-     padding: 10px 0;
+
+.m-list>li a {
+    padding: 10px 0;
     display: block;
     width: 100%;
     height: 100%;
     color: #000;
 }
-.m-list>li a:active{
+
+.m-list>li a:active {
     font-weight: bolder;
 }
+
 .m-list>li:hover {
     cursor: pointer;
     background: #f9f9f9;
