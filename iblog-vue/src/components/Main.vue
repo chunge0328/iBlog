@@ -4,7 +4,7 @@
     <div class="art-list">
       <article-item
        v-for="item in list"
-       :aid="item.id" :title="item.title" 
+       :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list"
        ></article-item>
 
        <button class="see-more" @click="getMore()" v-if="!infoshow">查看更多</button>
@@ -26,7 +26,7 @@ export default {
     return {
       list: [],
       page: 0,
-      size: 2,
+      size: 6,
       infoshow: false
     }
   },
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     fetchData(page,size) {
-      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}`).then((res) => {
+      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}&type`).then((res) => {
         console.log(res.body.list)
         if(res.body.list.length > 0){
           this.list = this.list.concat(res.body.list)

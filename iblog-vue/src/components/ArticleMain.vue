@@ -1,5 +1,8 @@
 <template lang="html">
-  <div v-html="tmp" class="mdcontent markdown-body"></div>
+  
+  <div class="">
+    <div v-html="tmp" class="mdcontent markdown-body"></div>
+  </div> 
 </template>
 
 <script>
@@ -9,7 +12,7 @@ export default {
       tmp: this.tmp
     }
   },
-  mounted() {
+  beforeMount() {
     console.log(this.$route.params)
     let id = this.$route.params.id
     // http://182.254.211.214
@@ -21,7 +24,7 @@ export default {
         var text = res.body.content
         var converter = new showdown.Converter()
         this.tmp = converter.makeHtml(text)
-      }).catch(function (err) {
+      }).catch(function(err) {
         console.log(err)
       })
     }
@@ -35,20 +38,23 @@ export default {
   font-size: 14px;
 }
 
+.comment-list {
+  background-color: #fff;
+  list-style: none
+}
 
+.comment-list>li {
+  padding: 10px;
+  white-space: normal;
+  position: relative;
+  border-bottom: #EBF2F6 1px solid;
+}
 
-
-/* .mdcontent pre{
-     padding-right: 1em;
-    padding-left: 1em;
-    margin: 1em 0;
-    overflow: auto;
-    font-family: Menlo, Monaco, Consolas, "Andale Mono", "lucida console", "Courier New", monospace;
-    font-size: 14px;
-    word-wrap: break-word;
-    background: #ebeef5 !important;
-    border-radius: 4px;
-} */
+.comment-box {
+  padding-top: 20px;
+  height: 200px;
+  background: #f5f7f9;
+}
 
 @font-face {
   font-family: octicons-link;

@@ -6,6 +6,7 @@ function StaticRouter(req, res, pathname) {
     let filePath = './' + pathname
     fs.stat(filePath, function (err, state) {
         let hasExtend = pathname.match(/\.\w+$/)
+        console.log('hasExtend',hasExtend)
         if (state && hasExtend) {
             let mimeName = mime[hasExtend[0]]
             if (!mimeName) {

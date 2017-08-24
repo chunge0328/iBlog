@@ -1,23 +1,18 @@
-const DB = require('../db_helper')
-const conn = DB.conn
+const query = require('../db_helper')
 
 function add(obj) {
-    DB.MysqlOpen()
-    var userAddSql = 'INSERT INTO article(id,summary,title,list) VALUES(?,?,?,?)';
-    var userAddSql_Params = [obj.id, obj.summary, obj.title, obj.list];
+
+    var sql = `INSERT INTO article(id,summary,title,list) VALUES('${obj.id}','${obj.summary}','${obj.title}','${obj.list}')`;
     //增
-    conn().query(userAddSql, userAddSql_Params, function (err, result) {
+    query(sql, function (err, result, fields) {
         if (err) {
             console.log('[INSERT ERROR] - ', err.message);
             return;
         }
-
         console.log('--------------------------INSERT----------------------------');
-        //console.log('INSERT ID:',result.insertId);        
         console.log('INSERT ID:', result);
         console.log('-----------------------------------------------------------------\n\n');
-        DB.MysqlClose()
-    });
+    })
 
 }
 
@@ -30,10 +25,8 @@ function update() {
 }
 
 function select(page, size, type, callback) {
-    DB.MysqlOpen()
-    var userAddSql = "SELECT * FROM article WHERE list LIKE '%?%' LIMIT ?,?;"
-    var userAddSql_Params = [type, Number(page) * Number(size), Number(size)]
-    conn().query(userAddSql, userAddSql_Params, function (err, rows, fields) {
+    var sql = `SELECT * FROM article WHERE list LIKE '%${type}%' LIMIT ${Number(page) * Number(size)},${Number(size)};`;
+    query(sql, function (err, rows, fields) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message)
             return;
@@ -41,25 +34,20 @@ function select(page, size, type, callback) {
         callback({
             list: rows
         });
-        DB.MysqlClose()
-    });
+    })
 }
 
 function getArticleById(id, callback) {
-    DB.MysqlOpen()
-    var userAddSql = 'SELECT * FROM article where id = ?'
-    var userAddSql_Params = [id]
-    //增
-    conn().query(userAddSql, userAddSql_Params, function (err, row, fields) {
+    var sql = `SELECT * FROM article where id = ${id}`;
+    query(sql, function (err, rows, fields) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
             return;
         }
         callback({
-            article: row[0]
+            article: rows[0]
         });
-        DB.MysqlClose()
-    });
+    })
 }
 
 module.exports = {

@@ -4,11 +4,11 @@ const readMD = require('../utils/fs_util/read_md')
 
 function list(req, res) {
     let query = url.parse(req.url, true).query
-    let page = query.page
-    let size = query.size
+    let page = Number(query.page)
+    let size = Number(query.size)
     let type = query.type
-    if (typeof size !== 'number'
-        || typeof page !== 'number'
+    if (isNaN(page)
+        || isNaN(size)
         || typeof type !== 'string') {
         res.writeHead(400, { 'Content-Type': 'application/json;charset=UTF-8' })
         res.end('400 Bad Request')

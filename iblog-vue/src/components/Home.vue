@@ -29,12 +29,15 @@
 </template>
 
 <script>
-
+import router from '../router'
 export default {
     data() {
         return {
             isActive: [true, false, false]
         }
+    },
+    mounted(){
+        window.location.hash = '/home/main'
     },
     methods: {
         choose(e) {

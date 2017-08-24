@@ -10,8 +10,12 @@
     <hr>
       <article-item
        v-for="item in list"
-       :aid="item.id" :title="item.title" 
+        :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list"
        ></article-item>
+
+      <button class="see-more" @click="getMore()" v-if="!infoshow">查看更多</button>
+       <button class="info-show" v-if="infoshow">到底啦</button>
+
   </div>
 
 </template>
@@ -21,14 +25,16 @@ import ArticleItem from './ArticleItem'
 export default {
   data() {
     return {
-      list: [
-        {
-          title: 'fdifahodis',
-          id: 'sdfadf'
-        }
-      ],
-      isActive: [false, false, false, false, false]
+      list: [],
+      page: 0,
+      size: 6,
+      infoshow: false,
+      type: 'JavaScript',
+      isActive: [true, false, false, false, false]
     }
+  },
+  beforeMount(){
+    this.fetchData(this.page, this.size, this.type, false)
   },
   methods: {
     handleType(e) {
@@ -36,7 +42,8 @@ export default {
         this.isActive = [false, false, false, false, false]
         let index;
         console.log(e.target.innerHTML)
-        switch (e.target.innerHTML) {
+        let type = e.target.innerHTML
+        switch (type) {
           case 'JavaScript':
             index = 0
             break
@@ -54,7 +61,37 @@ export default {
             break
         }
         this.isActive[index] = true
+        this.page = 0
+        this.type = type
+        this.infoshow = false
+        this.list = []
+        this.fetchData(this.page, this.size, this.type, false)
       }
+    },
+    fetchData(page, size, type, isMore) {
+      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}&type=${type}`).then((res) => {
+        console.log(res.body.list)
+        if (isMore) {
+          if (res.body.list.length > 0) {
+            this.list = this.list.concat(res.body.list)
+          } else {
+            this.infoshow = true
+          }
+        } else {
+          console.log('change type ...')
+          if(res.body.list.length > 0){
+            this.list = res.body.list
+          }else{
+            this.infoshow = true
+          }
+        }
+
+      }).catch(function (err) {
+        console.log(err)
+      })
+    },
+    getMore() {
+      this.fetchData(++this.page, this.size, this.type, true)
     }
   },
   components: {
@@ -93,6 +130,28 @@ export default {
 
 .types>li:hover,
 .types>li.active {
+  background: #222;
+  color: #fff;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.see-more,
+.info-show {
+  display: block;
+  margin: 20px auto;
+  padding: 4px 12px;
+  color: #555;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 2px;
+  border: 2px solid #555;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out 0s;
+  outline: none;
+}
+
+.see-more:hover {
   background: #222;
   color: #fff;
   border-radius: 0;

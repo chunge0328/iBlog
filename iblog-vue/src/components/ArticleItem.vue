@@ -3,11 +3,9 @@
           <router-link :to="'/home/articlemain/'+aid">
                 <span class="art-title">{{title}}</span>
                 <div class="tag-box">
-                <span>占位</span>
-                <span>占位</span>
-                <span>占位</span>
+                <span>{{list}}</span>
                 </div> 
-                <p class="sm">占位  这是摘要</p>
+                <p class="sm">{{summary}}</p>
           </router-link>
       </div>
 </template>
@@ -16,7 +14,9 @@
 export default {
     props:{
         aid: String,
-        title: String
+        title: String,
+        list: String,
+        summary: String
     }
 }
 </script>
