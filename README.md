@@ -1,5 +1,5 @@
 # iBlog
-旨在打造一个多版本，小清新的博客系统，后端Node.js ，前端Vue, React单页
+旨在打造一个多版本，小清新的博客系统，后端Node.js ，前端Vue单页
 
 > 博客地址： [http://www.markcoding.cn:9090/](http://www.markcoding.cn:9090/)
 
