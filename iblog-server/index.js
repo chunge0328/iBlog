@@ -14,6 +14,7 @@ td.useRouter({
 td.run(9090)
 
 function home(req,res){
+    // 加载主页
     staticRouter(req,res,'static/index.html')
 }
 
