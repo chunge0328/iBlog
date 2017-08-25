@@ -1,16 +1,6 @@
-const server = require('./server/server')
+const TomDog = require('./TomDog')
 const staticRouter = require('./router/static_router')
-function TomDog() {}
 
-TomDog.prototype.useRouter = function (routes) {
-    this.routes = routes
-}
-
-TomDog.prototype.run = function (port, host) {
-    this.port = port
-    this.host = host
-    server.call(this);
-}
 
 ///////////////////// 使用TomDog///////////////////////////
 
@@ -28,7 +18,6 @@ function home(req,res){
 }
 
 function list(req,res){
-    // console.log('list')
     articleApi.list(req,res)
 }
 
