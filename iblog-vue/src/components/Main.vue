@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     fetchData(page,size) {
-      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}&type`).then((res) => {
+      this.$http.get(`http://182.254.211.214:9090/api/article/list?size=${size}&page=${page}&type`).then((res) => {
         console.log(res.body.list)
         if(res.body.list.length > 0){
           this.list = this.list.concat(res.body.list)

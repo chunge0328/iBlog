@@ -69,7 +69,7 @@ export default {
       }
     },
     fetchData(page, size, type, isMore) {
-      this.$http.get(`http://localhost:9090/api/article/list?size=${size}&page=${page}&type=${type}`).then((res) => {
+      this.$http.get(`http://182.254.211.214:9090/api/article/list?size=${size}&page=${page}&type=${type}`).then((res) => {
         console.log(res.body.list)
         if (isMore) {
           if (res.body.list.length > 0) {
