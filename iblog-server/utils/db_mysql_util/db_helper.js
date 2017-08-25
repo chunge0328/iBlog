@@ -7,7 +7,7 @@
 //         conn = mysql.createConnection({
 //             host: '182.254.211.214',
 //             user: 'root',
-//             password: 'ls19960608',
+//             password: 'xxx',
 //             database: 'iblog'
 //         })
 //          conn.connect()
@@ -33,7 +33,7 @@ const mysql = require("mysql");
 const pool = mysql.createPool({
     host: '182.254.211.214',
     user: 'root',
-    password: 'ls19960608',
+    password: 'xxx',
     database: 'iblog'
 });
 
