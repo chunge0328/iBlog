@@ -1,16 +1,13 @@
 <template lang="html">
 
-
     <div class="art-list">
       <article-item
        v-for="item in list"
-       :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list"
+       :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list" :pub_time="item.pub_time" :read_count="item.read_count"
        ></article-item>
 
        <button class="see-more" @click="getMore()" v-if="!infoshow">查看更多</button>
        <button class="info-show" v-if="infoshow">到底啦</button>
-
-
     </div>
 
 </template>
@@ -32,6 +29,7 @@ export default {
   },
   created() {
     this.fetchData(this.page,this.size)
+   
   },
   methods: {
     fetchData(page,size) {

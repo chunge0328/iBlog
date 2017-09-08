@@ -14,7 +14,7 @@ function list(req, res) {
         res.end('400 Bad Request')
         return;
     }
-  
+
     articleDao.select(page, size, type, function (list) {
         console.log(list)
         res.writeHead(200, {
@@ -25,10 +25,13 @@ function list(req, res) {
 }
 
 function detail(req, res) {
-    // let pathname = url.parse(req.url).pathname
-    // let id = pathname.match(/\d+$/)
     let query = url.parse(req.url, true).query
     let id = query.id
+    // 统计次数更新
+    articleDao.addArticleReadcount(id, function (info) {
+        console.log(info);
+    })
+    // 输出博客内容
     articleDao.getArticleById(id, function (data) {
         let article = data.article
         readMD(article.id + '.md', function (data) {
@@ -45,7 +48,8 @@ function detail(req, res) {
     })
 }
 
+
 module.exports = {
     list: list,
-    detail: detail
+    detail: detail,
 }

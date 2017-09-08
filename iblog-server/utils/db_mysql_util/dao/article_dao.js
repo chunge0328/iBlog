@@ -50,10 +50,22 @@ function getArticleById(id, callback) {
     })
 }
 
+function addArticleReadcount(id,callback){
+    var sql = `UPDATE article SET read_count = (read_count + 1) WHERE id = ${id}`;
+    query(sql,function(err,info){
+        if(err){
+            console.log('[UPDATE ERROR] - ', err.message);
+            return;
+        }
+        callback(info);
+    })
+}
+
 module.exports = {
     add: add,
     dele: dele,
     update: update,
     select: select,
-    getArticleById: getArticleById
+    getArticleById: getArticleById,
+    addArticleReadcount: addArticleReadcount
 }

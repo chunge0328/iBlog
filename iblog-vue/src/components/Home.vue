@@ -3,8 +3,8 @@
         <div class="left-menu">
             <div class="site-meta">博客</div>
             <div class="u-info">
-                <img class="site-author-image" itemprop="image" src="https://coderlius.github.io/images/avatar.gif" alt="corderLius">
-               <p class="info-desc">设计师美感，工匠师精细，数学家严谨，程序员生活。。。</p>
+                <img class="site-author-image" itemprop="image" src="http://ou1frpks8.bkt.clouddn.com/hashqi.jpg" alt="corderLius">
+               <p class="info-desc">回首向来萧瑟处，归去，也无风雨也无晴</p>
             </div>
            
             <ul class="m-list"  @click="choose">
@@ -109,7 +109,8 @@ export default {
 .site-meta {
     padding: 20px 0;
     color: #fff;
-    background: #222;
+    /* background: #222; */
+    background-color: #b6d7f7;
     font-size: 24px;
     text-align: center;
 }

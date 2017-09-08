@@ -18,11 +18,12 @@ const routes = [
       {
         path: '/home/main',
         component: Main,
-        meta: { keepAlive: true } 
+        meta: { keepAlive: true }
       },
       {
         path: '/home/categories',
-        component: Categories
+        component: Categories,
+        meta: { keepAlive: true }
       },
       {
         path: '/home/articlemain/:id',

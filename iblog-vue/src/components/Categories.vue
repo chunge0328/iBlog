@@ -10,7 +10,7 @@
     <hr>
       <article-item
        v-for="item in list"
-        :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list"
+        :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list" :pub_time="item.pub_time" :read_count="item.read_count"
        ></article-item>
 
       <button class="see-more" @click="getMore()" v-if="!infoshow">查看更多</button>

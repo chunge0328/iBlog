@@ -2,19 +2,25 @@
   
   <div class="">
     <div v-html="tmp" class="mdcontent markdown-body"></div>
-  </div> 
+    <CommentForm :aid="aid"/>
+    <CommentList :aid="aid"/>
+  </div>
 </template>
 
 <script>
+import CommentForm from './CommentForm'
+import CommentList from './CommentList'
 export default {
   data() {
     return {
-      tmp: this.tmp
+      tmp: this.tmp,
+      aid: null
     }
   },
   beforeMount() {
-    console.log(this.$route.params)
+    // console.log(this.$route.params)
     let id = this.$route.params.id
+    this.aid = id
     this.fetchData(`http://182.254.211.214:9090/api/article/detail?id=${id}`)
   },
   methods: {
@@ -27,6 +33,10 @@ export default {
         console.log(err)
       })
     }
+  },
+  components: {
+    CommentForm,
+    CommentList
   }
 }   
 </script>
@@ -50,9 +60,8 @@ export default {
 }
 
 .comment-box {
-  padding-top: 20px;
-  height: 200px;
-  background: #f5f7f9;
+  padding: 8px;
+  border-top: 12px solid #f5f7f9;
 }
 
 @font-face {
@@ -66,7 +75,7 @@ export default {
   line-height: 1.5;
   color: #24292e;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   word-wrap: break-word;
 }
@@ -74,7 +83,6 @@ export default {
 .markdown-body .pl-c {
   color: #6a737d;
 }
-
 .markdown-body .pl-c1,
 .markdown-body .pl-s .pl-v {
   color: #005cc5;

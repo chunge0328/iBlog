@@ -3,20 +3,26 @@
           <router-link :to="'/home/articlemain/'+aid">
                 <span class="art-title">{{title}}</span>
                 <div class="tag-box">
-                <span>{{list}}</span>
+                  <span>{{list}}</span>
                 </div> 
-                <p class="sm">{{summary}}</p>
+                <p class="sm">
+                    <span class="pub-time">发布于{{pub_time | formatDate}}</span>
+                    <span class="read-count">{{read_count}}浏览</span>
+                </p>
+                <!-- <p class="sm main" v-if="summary">{{summary}}</p> -->
           </router-link>
       </div>
 </template>
 
 <script>
 export default {
-    props:{
+    props: {
         aid: String,
         title: String,
         list: String,
-        summary: String
+        summary: String,
+        read_count: Number,
+        pub_time: String
     }
 }
 </script>
@@ -25,17 +31,17 @@ export default {
 .art-item {
     border-bottom: 2px dotted #ccc;
     padding: 20px 12px;
-
 }
+
 .art-item:hover {
     cursor: pointer;
 }
 
-.art-item>a{
+.art-item>a {
     display: block;
     width: 100%;
     height: 100%;
-    color: inherit; 
+    color: inherit;
 }
 
 .tag-box {
@@ -65,5 +71,18 @@ export default {
     color: #999;
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 12px;
+}
+
+.sm.main {
+    background-color: #f8f3f3;
+    margin-top: 4px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.read-count {
+    margin-left: 20px;
+    color: #969696;
+    text-decoration: underline
 }
 </style>
