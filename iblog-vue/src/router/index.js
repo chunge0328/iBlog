@@ -7,7 +7,8 @@ import Main from '../components/Main'
 import Categories from '../components/Categories'
 import ArticleMain from '../components/ArticleMain'
 import Call from '../components/Call'
-
+import ChatLogin from '../components/ChatLogin'
+import Chat from '../components/Chat'
 
 Vue.use(VueRouter)
 const routes = [
@@ -32,6 +33,14 @@ const routes = [
       {
         path: '/home/call',
         component: Call
+      },
+      {
+        path: '/home/chatlogin',
+        component: ChatLogin
+      },
+       {
+        path: '/home/chat',
+        component: Chat
       },
       { path: '*', redirect: '/home/main' }
     ]

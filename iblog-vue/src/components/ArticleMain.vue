@@ -1,6 +1,7 @@
 <template lang="html">
   
   <div class="">
+    <Waiting v-if="waiting"/>
     <div v-html="tmp" class="mdcontent markdown-body"></div>
     <CommentForm :aid="aid"/>
     <CommentList :aid="aid"/>
@@ -10,11 +11,13 @@
 <script>
 import CommentForm from './CommentForm'
 import CommentList from './CommentList'
+import Waiting from './Waiting'
 export default {
   data() {
     return {
       tmp: this.tmp,
-      aid: null
+      aid: null,
+      waiting: true
     }
   },
   beforeMount() {
@@ -26,6 +29,7 @@ export default {
   methods: {
     fetchData(url) {
       this.$http.get(url).then((res) => {
+        this.waiting = false
         var text = res.body.content
         var converter = new showdown.Converter()
         this.tmp = converter.makeHtml(text)
@@ -36,7 +40,8 @@ export default {
   },
   components: {
     CommentForm,
-    CommentList
+    CommentList,
+    Waiting
   }
 }   
 </script>

@@ -8,6 +8,7 @@
       <li :class="{active : isActive[4]}">其他</li>
     </ul>
     <hr>
+      <Waiting v-if="waiting"/>
       <article-item
        v-for="item in list"
         :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list" :pub_time="item.pub_time" :read_count="item.read_count"
@@ -22,6 +23,7 @@
 
 <script>
 import ArticleItem from './ArticleItem'
+import Waiting from './Waiting'
 export default {
   data() {
     return {
@@ -30,7 +32,8 @@ export default {
       size: 6,
       infoshow: false,
       type: 'JavaScript',
-      isActive: [true, false, false, false, false]
+      isActive: [true, false, false, false, false],
+      waiting: true
     }
   },
   beforeMount(){
@@ -43,6 +46,7 @@ export default {
         let index;
         console.log(e.target.innerHTML)
         let type = e.target.innerHTML
+        this.waiting = true
         switch (type) {
           case 'JavaScript':
             index = 0
@@ -70,7 +74,7 @@ export default {
     },
     fetchData(page, size, type, isMore) {
       this.$http.get(`http://182.254.211.214:9090/api/article/list?size=${size}&page=${page}&type=${type}`).then((res) => {
-        console.log(res.body.list)
+        this.waiting = false
         if (isMore) {
           if (res.body.list.length > 0) {
             this.list = this.list.concat(res.body.list)
@@ -95,7 +99,8 @@ export default {
     }
   },
   components: {
-    ArticleItem
+    ArticleItem,
+    Waiting
   }
 }
 </script>

@@ -1,6 +1,7 @@
 <template lang="html">
 
     <div class="art-list">
+      <Waiting v-if="waiting"/>
       <article-item
        v-for="item in list"
        :aid="item.id" :title="item.title" :summary="item.summary" :list="item.list" :pub_time="item.pub_time" :read_count="item.read_count"
@@ -14,28 +15,31 @@
 
 <script>
 import ArticleItem from './ArticleItem'
+import Waiting from './Waiting'
 export default {
   name: 'main',
   components: {
-    ArticleItem
+    ArticleItem,
+    Waiting
   },
   data() {
     return {
       list: [],
       page: 0,
       size: 6,
-      infoshow: false
+      infoshow: false,
+      waiting: true
     }
   },
   created() {
     this.fetchData(this.page,this.size)
-   
   },
   methods: {
     fetchData(page,size) {
       this.$http.get(`http://182.254.211.214:9090/api/article/list?size=${size}&page=${page}&type`).then((res) => {
         console.log(res.body.list)
         if(res.body.list.length > 0){
+          this.waiting = false
           this.list = this.list.concat(res.body.list)
         }else{
           this.infoshow = true
