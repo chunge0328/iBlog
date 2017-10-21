@@ -2,7 +2,8 @@ const query = require('../db_helper')
 
 function add(obj) {
 
-    var sql = `INSERT INTO article(id,summary,title,list) VALUES('${obj.id}','${obj.summary}','${obj.title}','${obj.list}')`;
+    var sql = `INSERT INTO article(id,summary,title,list,read_count,pub_time)
+     VALUES('${obj.id}','${obj.summary}','${obj.title}','${obj.list}','${obj.read_count}','${obj.pub_time}')`;
     //增
     query(sql, function (err, result, fields) {
         if (err) {

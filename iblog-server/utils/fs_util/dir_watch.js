@@ -2,21 +2,24 @@
 const fs = require('fs')
 const articleDao = require('../db_mysql_util/dao/article_dao')
 const readMD = require('./read_md')
+const path = require('path')
 
-function watchMDFiles() {
+function build() {
   const path = './static/mds'
-  fs.watch(path, function (event, filename) {
-    console.log('event is: ' + event);
-    if (event == 'rename') { // 有文件变化
-      fs.stat(path + '/' + filename, function (err, state) {
-
-        if (err) {
-          // 删除
-        } else {
+  fs.readdir(path, function (err, files) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    var count = files.length;
+    files.forEach(function (filename) {
+      fs.stat(path + '/' + filename, function (err, stats) {
+        if (err) throw err;
+        //文件
+        if (stats.isFile()) {
           // 重命名
-          let newName = state.ino + '.md'
-          fs.renameSync(path + '/' + filename, path + '/' + newName)
-          readMD(newName, function (data) {
+        
+          readMD(filename, function (data) {
 
             let content = data.toString()
             let index = content.search(/====/)
@@ -27,20 +30,37 @@ function watchMDFiles() {
             let summary = configObj.summary
             let title = configObj.title
             let list = configObj.list.join(',')
+            let read_count = 0
+            let pub_time = new Date()
             // 增加
             articleDao.add({
-              id: state.ino,
+              id: filename.split('.')[0],
               summary: '',
               title: title,
-              list: list
+              list: list,
+              read_count: read_count,
+              pub_time: getTime(pub_time)
             })
           })
-
         }
-
-      })
-    }
+      });
+    });
   });
 }
 
-module.exports = watchMDFiles
+
+function getTime(date){
+  var y = date.getFullYear()
+  var m = to2(date.getMonth() + 1)
+  var d = to2(date.getDate())
+  var h = to2(date.getHours())
+  var m = to2(date.getMinutes())
+  var s = to2(date.getSeconds())
+  return `${y}-${m}-${d} ${h}:${m}:${s}`
+}
+
+function to2(val){
+  return val > 9 ? '' + val : '0' + val
+}
+
+module.exports = build
