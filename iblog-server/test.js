@@ -1,3 +1,4 @@
-const build = require('./utils/fs_util/dir_watch')
+const dir = require('./utils/fs_util/dir_watch')
 
-build();
+// dir.build();
+dir.watchMDFiles();

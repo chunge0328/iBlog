@@ -118,3 +118,15 @@ window.location.hash = '/home/main'  // 主页的hash
   - `bus.$on('comment-add', function(){}) // 用于订阅一个事件，也即消息接受者`
   - `bus`是一个事件中心，由`new Vue()`导出 
 6. 使用`this.$http.get`时，回调函数的参数会是一个`res.body.xxx`，而不是`res.xxx`(xxx即输出的JSON对象)
+
+
+### 2017/10/22
+- 博客文件更新业务的方案换了
+	- 原来的方案是使用`fs.watch`方式，监听文件的变化，进行入库的操作
+	- 现在的方案是：需要手动更新。因为发现原来的方案有bug。博客md文件更新后的做法为是先获得数据库中的list，以及获得文件夹中的文件目录files,然后求出差集。差集就是增加的文件列表。然后再对差集进行入库操作
+
+- 重命名的方案换了
+	- 原来的方案是使用`state.ino`进行命名
+	- 现在采用随机数的形式命名：`Math.random().toString(12).substr(2)`
+
+- 对HTTPS做了个尝试，后续尝试使用HTTPS

@@ -38,8 +38,22 @@ function select(page, size, type, callback) {
     })
 }
 
+
+function getIdList(callback){
+    var sql = 'SELECT id from article'
+    query(sql, function (err, rows, fields) {
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message)
+            return;
+        }
+        callback({
+            list: rows
+        });
+    })
+}
+
 function getArticleById(id, callback) {
-    var sql = `SELECT * FROM article where id = ${id}`;
+    var sql = `SELECT * FROM article where id = '${id}'`;
     query(sql, function (err, rows, fields) {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
@@ -68,5 +82,6 @@ module.exports = {
     update: update,
     select: select,
     getArticleById: getArticleById,
-    addArticleReadcount: addArticleReadcount
+    addArticleReadcount: addArticleReadcount,
+    getIdList:getIdList
 }
